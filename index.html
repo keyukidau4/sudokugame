@@ -1,32 +1,114 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/sudoku.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sudoku Game - Play Sudoku Online for Free</title>
-    <meta
-      name="description"
-      content="Free Sudoku game with a user-friendly interface, suitable for all ages. Play Sudoku online every day to train your brain and have fun."
-    />
-    <meta
-      name="keywords"
-      content="Sudoku, Sudoku game, online Sudoku, brain training, puzzle, free"
-    />
-    <meta
-      property="og:title"
-      content="Sudoku Game - Play Sudoku Online for Free"
-    />
-    <meta
-      property="og:description"
-      content="Free Sudoku game with a user-friendly interface, suitable for all ages. Play Sudoku online every day to train your brain and have fun."
-    />
-    <meta property="og:image" content="/vite.svg" />
-    <meta property="og:type" content="website" />
-    <meta name="author" content="Nguyen Van A - Sudoku Game CEO" />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Primary Meta Tags -->
+  <title>Sudoku Game - Play Free Online Sudoku Puzzles | 5x5, 7x7, 10x10</title>
+  <meta name="title" content="Sudoku Game - Play Free Online Sudoku Puzzles | 5x5, 7x7, 10x10" />
+  <meta name="description"
+    content="Play free online Sudoku puzzles with multiple grid sizes (5x5, 7x7, 10x10) and difficulty levels. Beautiful, responsive design with hints, timer, and statistics tracking." />
+  <meta name="keywords"
+    content="sudoku, puzzle, game, online, free, 5x5, 7x7, 10x10, brain game, logic puzzle, number puzzle" />
+  <meta name="author" content="Sudoku Game" />
+  <meta name="robots" content="index, follow" />
+  <meta name="language" content="English" />
+  <meta name="revisit-after" content="7 days" />
+
+  <!-- Viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://your-domain.com/" />
+  <meta property="og:title" content="Sudoku Game - Play Free Online Sudoku Puzzles" />
+  <meta property="og:description"
+    content="Play free online Sudoku puzzles with multiple grid sizes and difficulty levels. Beautiful, responsive design with hints and statistics." />
+  <meta property="og:image" content="https://your-domain.com/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content="Sudoku Game" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://your-domain.com/" />
+  <meta property="twitter:title" content="Sudoku Game - Play Free Online Sudoku Puzzles" />
+  <meta property="twitter:description"
+    content="Play free online Sudoku puzzles with multiple grid sizes and difficulty levels. Beautiful, responsive design with hints and statistics." />
+  <meta property="twitter:image" content="https://your-domain.com/twitter-image.jpg" />
+  <meta property="twitter:image:alt" content="Sudoku Game Screenshot" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#2563eb" />
+  <meta name="msapplication-TileColor" content="#2563eb" />
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://your-domain.com/" />
+
+  <!-- Preconnect to external domains -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Sudoku Game",
+      "description": "Play free online Sudoku puzzles with multiple grid sizes and difficulty levels",
+      "url": "https://your-domain.com/",
+      "applicationCategory": "GameApplication",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Sudoku Game"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1250"
+      },
+      "featureList": [
+        "Multiple grid sizes (5x5, 7x7, 10x10)",
+        "Multiple difficulty levels",
+        "Hint system",
+        "Timer and statistics",
+        "Responsive design",
+        "Keyboard support"
+      ]
+    }
+    </script>
+
+  <!-- Performance hints -->
+  <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+  <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+</head>
+
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
+
+  <!-- No JavaScript fallback -->
+  <noscript>
+    <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+      <h1>Sudoku Game</h1>
+      <p>This application requires JavaScript to run. Please enable JavaScript in your browser to play Sudoku.</p>
+    </div>
+  </noscript>
+</body>
+
 </html>

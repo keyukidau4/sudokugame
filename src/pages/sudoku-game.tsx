@@ -7,6 +7,7 @@ import GameControls from "../components/game-controls";
 import DifficultySelector from "../components/difficulty-selector";
 import GridSizeSelector from "../components/grid-size-selector";
 import GameModals from "../components/game-modals";
+import ConfirmDialog from "../components/confirm-dialog";
 import {
   generatePuzzle,
   validateMove,
@@ -33,6 +34,7 @@ export default function SudokuGame() {
   });
 
   const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(null);
+  const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   // Timer effect
   useEffect(() => {
@@ -197,6 +199,19 @@ export default function SudokuGame() {
     }));
   }, [gameState.difficulty, gameState.gridSize]);
 
+  const handleResetGame = () => {
+    setShowResetConfirm(true);
+  };
+
+  const handleConfirmReset = () => {
+    setShowResetConfirm(false);
+    handleNewGame();
+  };
+
+  const handleCancelReset = () => {
+    setShowResetConfirm(false);
+  };
+
   const handlePauseGame = useCallback(() => {
     setGameState((prev) => ({
       ...prev,
@@ -264,7 +279,7 @@ export default function SudokuGame() {
   // Initialize game on mount
   useEffect(() => {
     handleNewGame();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const totalCells = gameState.gridSize * gameState.gridSize;
@@ -331,6 +346,34 @@ export default function SudokuGame() {
                 </button>
               </div>
 
+              {/* Game Controls */}
+              <div className="flex flex-wrap justify-center gap-4 mb-6">
+                <GameControls
+                  onCheckSolution={() => { }}
+                  onPauseGame={handlePauseGame}
+                  onSaveGame={() => { }}
+                  onResetGame={handleResetGame}
+                  isPaused={gameState.isPaused}
+                />
+
+                <GameStats
+                  gameTime={gameState.gameTime}
+                  moveCount={gameState.moveCount}
+                  hintsUsed={gameState.hintsUsed}
+                  completion={completion}
+                />
+
+                <GridSizeSelector
+                  currentGridSize={gameState.gridSize}
+                  onGridSizeChange={handleGridSizeChange}
+                />
+
+                <DifficultySelector
+                  currentDifficulty={gameState.difficulty}
+                  onDifficultyChange={handleDifficultyChange}
+                />
+              </div>
+
               <SudokuGrid
                 grid={gameState.grid}
                 initialGrid={gameState.initialGrid}
@@ -349,40 +392,9 @@ export default function SudokuGame() {
             </div>
           </div>
 
-          {/* Game Controls */}
+          {/* Sidebar Controls */}
           <div className="lg:col-span-4 space-y-6">
-            <NumberInputPad
-              onNumberInput={handleNumberInput}
-              onClearCell={handleClearCell}
-              onGetHint={handleGetHint}
-              disabled={gameState.isPaused}
-              gridSize={gameState.gridSize}
-            />
 
-            <GameStats
-              gameTime={gameState.gameTime}
-              moveCount={gameState.moveCount}
-              hintsUsed={gameState.hintsUsed}
-              completion={completion}
-            />
-
-            <GridSizeSelector
-              currentGridSize={gameState.gridSize}
-              onGridSizeChange={handleGridSizeChange}
-            />
-
-            <DifficultySelector
-              currentDifficulty={gameState.difficulty}
-              onDifficultyChange={handleDifficultyChange}
-            />
-
-            <GameControls
-              onCheckSolution={() => {}}
-              onPauseGame={handlePauseGame}
-              onSaveGame={() => {}}
-              onResetGame={handleNewGame}
-              isPaused={gameState.isPaused}
-            />
           </div>
         </div>
       </main>
@@ -402,6 +414,17 @@ export default function SudokuGame() {
             isPaused: false,
           }))
         }
+      />
+
+      <ConfirmDialog
+        isOpen={showResetConfirm}
+        title="Reset Game"
+        message="Are you sure you want to start a new game? Your current progress will be lost."
+        confirmText="Reset Game"
+        cancelText="Cancel"
+        onConfirm={handleConfirmReset}
+        onCancel={handleCancelReset}
+        variant="danger"
       />
     </div>
   );

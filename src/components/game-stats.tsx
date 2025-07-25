@@ -25,11 +25,7 @@ export default function GameStats({ gameTime, moveCount, hintsUsed, completion }
           <span className="font-semibold">{moveCount}</span>
         </div>
         <div className="flex justify-between items-center">
-          <span className="text-gray-600">Hints Used</span>
-          <span className="font-semibold">{hintsUsed}</span>
-        </div>
-        <div className="flex justify-between items-center">
-          <span className="text-gray-600">Completion</span>
+          <span className="text-gray-600">Completion　</span>
           <span className="font-semibold text-green-600">{completion}%</span>
         </div>
       </div>
