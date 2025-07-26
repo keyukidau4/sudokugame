@@ -1,10 +1,10 @@
-import { Eraser, Lightbulb } from "lucide-react";
+import { Eraser } from "lucide-react";
 import type { GridSize } from "@/shared/schema";
 
 interface NumberInputPadProps {
   onNumberInput: (number: number) => void;
   onClearCell: () => void;
-  onGetHint: () => void;
+  onGetHint?: () => void;
   disabled: boolean;
   gridSize: GridSize;
 }
@@ -12,13 +12,12 @@ interface NumberInputPadProps {
 export default function NumberInputPad({
   onNumberInput,
   onClearCell,
-  onGetHint,
   disabled,
-  gridSize
+  gridSize,
 }: NumberInputPadProps) {
   const numbers = Array.from({ length: gridSize }, (_, i) => i + 1);
   const cols = gridSize === 5 ? 5 : gridSize === 7 ? 7 : 5;
-  
+
   return (
     <div className="bg-white rounded-xl shadow-lg p-6">
       <h3 className="text-lg font-semibold text-gray-800 mb-4">Number Input</h3>
@@ -43,14 +42,14 @@ export default function NumberInputPad({
           <Eraser className="w-4 h-4 mr-2" />
           Clear
         </button>
-        <button
+        {/* <button
           onClick={onGetHint}
           disabled={disabled}
           className="flex-1 px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
         >
           <Lightbulb className="w-4 h-4 mr-2" />
           Hint
-        </button>
+        </button> */}
       </div>
     </div>
   );

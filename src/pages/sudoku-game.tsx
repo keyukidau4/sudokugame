@@ -20,8 +20,8 @@ export default function SudokuGame() {
     grid: new Array(100).fill(null),
     initialGrid: new Array(100).fill(null),
     selectedCell: null,
-    difficulty: "normal",
-    gridSize: 10,
+    difficulty: "easy",
+    gridSize: 5,
     gameTime: 0,
     moveCount: 0,
     hintsUsed: 0,
@@ -33,7 +33,9 @@ export default function SudokuGame() {
     errorMessage: null,
   });
 
-  const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(null);
+  const [timerInterval, setTimerInterval] = useState<NodeJS.Timeout | null>(
+    null
+  );
   const [showResetConfirm, setShowResetConfirm] = useState(false);
 
   // Timer effect
@@ -220,33 +222,33 @@ export default function SudokuGame() {
     }));
   }, []);
 
-  const handleGetHint = useCallback(() => {
-    if (gameState.selectedCell === null || gameState.isPaused) return;
+  // const handleGetHint = useCallback(() => {
+  //   if (gameState.selectedCell === null || gameState.isPaused) return;
 
-    // Simple hint: find the correct number for the selected cell
-    const row = Math.floor(gameState.selectedCell / gameState.gridSize);
-    const col = gameState.selectedCell % gameState.gridSize;
+  //   // Simple hint: find the correct number for the selected cell
+  //   const row = Math.floor(gameState.selectedCell / gameState.gridSize);
+  //   const col = gameState.selectedCell % gameState.gridSize;
 
-    for (let num = 1; num <= gameState.gridSize; num++) {
-      if (validateMove(gameState.grid, row, col, num, gameState.gridSize)) {
-        const newGrid = [...gameState.grid];
-        newGrid[gameState.selectedCell] = num;
+  //   for (let num = 1; num <= gameState.gridSize; num++) {
+  //     if (validateMove(gameState.grid, row, col, num, gameState.gridSize)) {
+  //       const newGrid = [...gameState.grid];
+  //       newGrid[gameState.selectedCell] = num;
 
-        setGameState((prev) => ({
-          ...prev,
-          grid: newGrid,
-          hintsUsed: prev.hintsUsed + 1,
-          moveCount: prev.moveCount + 1,
-        }));
-        break;
-      }
-    }
-  }, [
-    gameState.selectedCell,
-    gameState.grid,
-    gameState.isPaused,
-    gameState.gridSize,
-  ]);
+  //       setGameState((prev) => ({
+  //         ...prev,
+  //         grid: newGrid,
+  //         hintsUsed: prev.hintsUsed + 1,
+  //         moveCount: prev.moveCount + 1,
+  //       }));
+  //       break;
+  //     }
+  //   }
+  // }, [
+  //   gameState.selectedCell,
+  //   gameState.grid,
+  //   gameState.isPaused,
+  //   gameState.gridSize,
+  // ]);
 
   // Keyboard input handler
   useEffect(() => {
@@ -319,7 +321,7 @@ export default function SudokuGame() {
 
       {/* Game Container */}
       <main className="max-w-6xl mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="flex justify-center">
           {/* Game Grid */}
           <div className="lg:col-span-8">
             <div className="bg-white rounded-xl shadow-lg p-6">
@@ -349,9 +351,9 @@ export default function SudokuGame() {
               {/* Game Controls */}
               <div className="flex flex-wrap justify-center gap-4 mb-6">
                 <GameControls
-                  onCheckSolution={() => { }}
+                  onCheckSolution={() => {}}
                   onPauseGame={handlePauseGame}
-                  onSaveGame={() => { }}
+                  onSaveGame={() => {}}
                   onResetGame={handleResetGame}
                   isPaused={gameState.isPaused}
                 />
@@ -373,15 +375,27 @@ export default function SudokuGame() {
                   onDifficultyChange={handleDifficultyChange}
                 />
               </div>
-
-              <SudokuGrid
-                grid={gameState.grid}
-                initialGrid={gameState.initialGrid}
-                selectedCell={gameState.selectedCell}
-                onCellSelect={handleCellSelect}
-                isPaused={gameState.isPaused}
-                gridSize={gameState.gridSize}
-              />
+              {/* Sudoku Grid */}
+              <div className="flex flex-col items-center gap-2">
+                <NumberInputPad
+                  onNumberInput={(number) => {
+                    handleNumberInput(number);
+                  }}
+                  onClearCell={() => {
+                    handleClearCell();
+                  }}
+                  disabled={gameState.isPaused}
+                  gridSize={gameState.gridSize}
+                />
+                <SudokuGrid
+                  grid={gameState.grid}
+                  initialGrid={gameState.initialGrid}
+                  selectedCell={gameState.selectedCell}
+                  onCellSelect={handleCellSelect}
+                  isPaused={gameState.isPaused}
+                  gridSize={gameState.gridSize}
+                />
+              </div>
 
               {/* Error Message */}
               {gameState.errorMessage && (
@@ -393,9 +407,7 @@ export default function SudokuGame() {
           </div>
 
           {/* Sidebar Controls */}
-          <div className="lg:col-span-4 space-y-6">
-
-          </div>
+          <div className="lg:col-span-4 space-y-6"></div>
         </div>
       </main>
 
